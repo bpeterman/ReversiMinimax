@@ -1,3 +1,5 @@
+import java.util.Vector;
+
 
 public class Main {
 	static Board  board = new Board();
@@ -6,6 +8,8 @@ public class Main {
 		board.printBoard();
 	}
 	
-
-
+	public Vector<Move> getValidMoves(int player){
+		
+		return null;
+	}
 }
