@@ -33,7 +33,7 @@ public class Board {
 		for (int j = 0; j < directions.size(); ++j) {
 			getFlips(pos, directions.get(j), player);
 		}
-		board[pos.getX()][pos.getY()]=player.getToken();
+		board[pos.getX()][pos.getY()] = player.getToken();
 	}
 
 	public void getFlips(Position pos, Position direction, Player player) {

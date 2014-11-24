@@ -1,6 +1,5 @@
 import java.util.Vector;
 
-
 public class Node {
 
 	public int height;
@@ -11,9 +10,9 @@ public class Node {
 	public double alpha;
 	public double beta;
 	public Position move;
-	
-	public Node(){
-		
+
+	public Node() {
+
 	}
 
 }
