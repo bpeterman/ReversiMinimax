@@ -5,14 +5,31 @@ public class Node {
 	public int height;
 	public double value;
 	public Board board;
-	public Node parent;
 	public List<Node> children;
 	public double alpha;
 	public double beta;
 	public Position move;
+	public Player player;
+	public boolean isMax;
 
 	public Node(Position move){
 		this.move=move;
+	}
+
+	public boolean isMax() {
+		return isMax;
+	}
+
+	public void setMax(boolean isMax) {
+		this.isMax = isMax;
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
 	}
 
 	public int getHeight() {
@@ -37,14 +54,6 @@ public class Node {
 
 	public void setBoard(Board board) {
 		this.board = board;
-	}
-
-	public Node getParent() {
-		return parent;
-	}
-
-	public void setParent(Node parent) {
-		this.parent = parent;
 	}
 
 	public List<Node> getChildren() {
