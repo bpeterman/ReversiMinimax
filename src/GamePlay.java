@@ -19,6 +19,7 @@ public class GamePlay {
 			board.printBoard();
 			List<Position> moves = board.getPossibleMoves(player);
 			if(moves.size()>0){
+				System.out.println("It is player " + player.getToken() + "'s move.");
 				System.out.println("Where would you like to move?:");
 				System.out.println("X: ");
 				int x = in.nextInt();
@@ -28,12 +29,17 @@ public class GamePlay {
 				if(myMove.isValid()){
 					if(moves.contains(myMove)){
 						System.out.println("Good Move");
+						board.doMove(myMove, player);
+						player=player.getOpposite();
 					} else {
 						System.out.println("Move Invalid");
 					}
 				} else{
 					System.out.println("Move Invalid");
 				}
+			} else{
+				System.out.print("You have no where to go.");
+				player=player.getOpposite();
 			}
 		}
 	}
