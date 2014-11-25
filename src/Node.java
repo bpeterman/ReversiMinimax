@@ -5,6 +5,7 @@ public class Node {
 	public int height;
 	public int value;
 	public Board board;
+	public Board secBoard;
 	public List<Node> children;
 	public double alpha;
 	public double beta;
@@ -14,6 +15,10 @@ public class Node {
 
 	public Node(Position move){
 		this.move=move;
+	}
+	
+	public Node(Node otherNode){
+		
 	}
 
 	public boolean isMax() {

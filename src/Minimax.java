@@ -1,35 +1,70 @@
+// Blake Peterman
+// Artificial Intelligence
+// 11-25-14
+// Reversi MiniMax
+
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Minimax {
 
 	Player player;
 	Node minimaxTree;
-	Board board;
 
-	public Minimax(Player player, Board board) {
+	public Minimax(Player player, Board passedBoard) {
 		this.player = player;
-		this.board = board;
-	}
+		Position position = new Position(0, 0);
+		minimaxTree = new Node(position);
+		minimaxTree.setBoard(passedBoard);
+		}
 
 	// this method will start the minimax search.
 	public Position doMiniMax() {
-		generateTree(player, board);
+		generateTreeWrap(player);
 		return evaluateTreeWrapper(minimaxTree);
 	}
 
-	public void generateTree(Player player, Board board) {
+	public void generateTreeWrap(Player player) {
 		minimaxTree.height=0;
-		minimaxTree.board = board;
 		minimaxTree.player = player;
 		minimaxTree.isMax = true;
+		minimaxTree.children = new ArrayList<Node>();
 		
+		Node tree = genTree(minimaxTree);
+		minimaxTree = tree;
 	}
 	
-	public List<Node> genChildren(Node node){
-		//be sure to increment the children's height 1 from the passed node.
+	public Node genTree(Node node){
+		if(node.height<=2){
+			if(node.height%2==0 && node.height>1){
+				node.player=node.player.getOpposite();
+			}
+			if(node.height%2!=0){
+				node.player=node.player.getOpposite();
+			}
+			List<Position> posMoves = node.getBoard().getPossibleMoves(node.player);
+			for(int i=0; i<posMoves.size(); ++i){
+				Node nextNode = new Node(posMoves.get(i));
+				nextNode.setBoard(node.getBoard());
+				nextNode.player = node.player;
+				nextNode.height = node.height + 1;
+				Board nodeBoard = new Board();
+				
+				
+				nodeBoard = new Board(node.board);
+				nodeBoard.doMove(new Position(nextNode.getMove()), new Player(nextNode.getPlayer()));
+				nextNode.setBoard(nodeBoard);
+				nextNode.children = new ArrayList<Node>();
+				Node kidNode = genTree(nextNode);
+				node.children.add(kidNode);
+			}
+			return node;
+		}
 		
-		return null;
+		return node;
 	}
+	
 
 	public Position evaluateTreeWrapper(Node node){
 		node = evaluate(node);

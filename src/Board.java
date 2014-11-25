@@ -3,11 +3,31 @@ import java.util.List;
 
 public class Board {
 
-	static int board[][] = new int[8][8];
+	private int board[][] = new int[8][8];
 
 	public Board() {
 
 	}
+	
+	public Board(Board anotherBoard) {
+		int theArray[][]  = new int[8][8];
+		for(int i =0; i<anotherBoard.board.length; ++i){
+			for(int j=0; j<anotherBoard.board.length; ++j){
+				theArray[i][j]=anotherBoard.board[i][j];
+			}
+		}
+		board=theArray;
+	}
+	
+
+
+//	public static int[][] getBoard() {
+//		return board;
+//	}
+//
+//	public static void setBoard(int[][] board) {
+//		Board.board = board;
+//	}
 
 	// initializes the beginning of the game board.
 	public void init() {
@@ -31,7 +51,7 @@ public class Board {
 		for (int j = 0; j < directions.size(); ++j) {
 			getFlips(pos, directions.get(j), player);
 		}
-		board[pos.getX()][pos.getY()] = player.getToken();
+		this.board[pos.getX()][pos.getY()] = player.getToken();
 	}
 
 	public void getFlips(Position pos, Position direction, Player player) {
@@ -45,11 +65,11 @@ public class Board {
 		Position newPos = new Position(x, y);
 		if (!newPos.isValid())
 			return;
-		if (board[x][y] == 0)
+		if (this.board[x][y] == 0)
 			return;
-		if (board[x][y] == player.getToken())
+		if (this.board[x][y] == player.getToken())
 			return;
-		if (board[x][y] == player.getOpposite().getToken()) {
+		if (this.board[x][y] == player.getOpposite().getToken()) {
 			flips.add(newPos);
 			while (stillValid) {
 				x += direction.getX();
@@ -57,11 +77,11 @@ public class Board {
 				newPos = new Position(x, y);
 				if (!newPos.isValid())
 					return;
-				if (board[x][y] == 0)
+				if (this.board[x][y] == 0)
 					return;
-				if (board[x][y] == player.getOpposite().getToken())
+				if (this.board[x][y] == player.getOpposite().getToken())
 					flips.add(newPos);
-				if (board[x][y] == player.getToken())
+				if (this.board[x][y] == player.getToken())
 					break;
 			}
 		}
@@ -73,10 +93,10 @@ public class Board {
 		for (int i = 0; i < flips.size(); ++i) {
 			int x = flips.get(i).getX();
 			int y = flips.get(i).getY();
-			if (board[x][y] == 1)
-				board[x][y] = 2;
+			if (this.board[x][y] == 1)
+				this.board[x][y] = 2;
 			else
-				board[x][y] = 1;
+				this.board[x][y] = 1;
 		}
 	}
 

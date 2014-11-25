@@ -5,8 +5,8 @@ public class GamePlay {
 
 	Board board;
 
-	public GamePlay(Board board) {
-		this.board = board;
+	public GamePlay() {
+		board=new Board();
 		board.init();
 		startGame();
 	}
@@ -30,7 +30,7 @@ public class GamePlay {
 					if (moves.contains(myMove)) {
 						System.out.println("Good Move");
 						board.doMove(myMove, player);
-						player = player.getOpposite();
+						doMinimaxMove(player.getOpposite());
 					} else {
 						System.out.println("Move Invalid");
 					}
@@ -49,6 +49,11 @@ public class GamePlay {
 		int[] results = board.getBoardScore();
 		System.out.println("Player 1 had: " + results[1]
 				+ " points and Player 2 had: " + results[2]);
+	}
+	
+	public void doMinimaxMove(Player myPlayer){
+		Minimax max = new Minimax(myPlayer, board);
+		board.doMove(max.doMiniMax(), myPlayer);
 	}
 
 }

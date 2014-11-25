@@ -4,6 +4,10 @@ public class Player {
 	public Player(int token) {
 		this.token = token;
 	}
+	
+	public Player(Player play) {
+		token = play.token;
+	}
 
 	public Player getOpposite() {
 		if (token == 1) {

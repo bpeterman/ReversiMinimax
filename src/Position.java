@@ -6,6 +6,11 @@ public class Position {
 		this.x = x;
 		this.y = y;
 	}
+	
+	public Position(Position pos){
+		x=pos.x;
+		y=pos.y;
+	}
 
 	@Override
 	public boolean equals(Object o) {
