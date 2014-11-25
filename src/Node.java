@@ -3,7 +3,7 @@ import java.util.List;
 public class Node {
 
 	public int height;
-	public double value;
+	public int value;
 	public Board board;
 	public List<Node> children;
 	public double alpha;
@@ -44,7 +44,7 @@ public class Node {
 		return value;
 	}
 
-	public void setValue(double value) {
+	public void setValue(int value) {
 		this.value = value;
 	}
 
